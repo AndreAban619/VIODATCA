@@ -1,0 +1,98 @@
+from tkinter import* #libreria para ventanas
+from tkinter import messagebox
+#Cambiar la ventana de .py a .pyw
+
+#####Variable#####
+pulsboton=0
+#creación de la ventana
+ventana=Tk() #Creamos un objeto ventana
+ventana.title("VIODATCA")#nombre de la ventana
+ventana.resizable(0,0)#para permitir la extencion de una ventana ancho,alto
+ventana.iconbitmap("Imagenes\VIODATCA.ico")#cambiar icono de la esquina
+#ventana.geometry("800x600")#tamaño de ventana
+marco=Frame(ventana, width="927",height="508")#creamos el objeto frame
+marco.pack(fill="both", expand="true")#unimos el frame con la ventana
+##########Creamos menu#########
+navmenu=Menu(ventana)
+ventana.config(menu=navmenu)
+##############Ventanas emergentes#######################
+def ventanaacercade():
+    messagebox.showinfo("VIODATCA", "Creador: André")
+def ventanBonus():
+    messagebox.showwarning("Bonus", "Este es el bonus")
+def ventanproposito():
+    messagebox.showerror("Proposito", "Este es el proposito")
+def ventansalir():
+    valor=messagebox.askquestion("SALIR", "¿Deseas salir de la aplicación?")
+    if valor=="yes":
+        ventana.destroy()
+def ventanreiniciar():
+    valor=messagebox.askokcancel("Reiniciar", "¿Deseas Reiniciar la aplicación?")
+    if valor==True:
+        ventana.destroy()
+#############################################
+def juegosss():
+
+    global pulsboton
+    pulsboton=pulsboton+1
+    
+    if pulsboton==1:
+        print(pulsboton)
+        venjuego=Tk()
+        venjuego.title("¡Vamos a Jugar!")
+        venjuego.geometry()
+        fondo2=PhotoImage(file="Imagenes\ondojuego.png")
+        Label(marco,image=fondo2).place(x="0", y="0")
+        ventana.destroy()
+    else :
+        
+        print("nadaaaaaaaaaaaaa")
+
+
+
+###########Pestañasss#####################3
+archivoinicio=Menu(navmenu, tearoff=0)
+##########Submenus########################
+archivoinicio.add_command(label="Inicio")
+archivoinicio.add_command(label="Reiniciar",command=ventanreiniciar)
+archivoinicio.add_separator()
+archivoinicio.add_command(label="Salir",command=ventansalir)
+
+archivoherramientas=Menu(navmenu, tearoff=0)
+##########Submenus########################
+
+archivoherramientas.add_command(label="Copiar")
+archivoherramientas.add_command(label="Cortar")
+archivoherramientas.add_command(label="Pegar")
+
+archivoayuda=Menu(navmenu, tearoff=0)
+##########Submenus########################
+
+archivoayuda.add_command(label="¿Cómo se juega?")
+archivoayuda.add_command(label="¿Quieres aprender a programar?")
+archivoayuda.add_separator()
+archivoayuda.add_command(label="Ayuda")
+
+
+archivoacerca=Menu(navmenu, tearoff=0)
+##########Submenus########################
+archivoacerca.add_command(label="¿Cuál es el propósito del proyecto?",command=ventanproposito)
+archivoacerca.add_command(label="Creadores", command=ventanaacercade)
+archivoacerca.add_separator()
+archivoacerca.add_command(label="Bonus",command=ventanBonus)
+
+navmenu.add_cascade(label="Inicio",menu=archivoinicio)
+navmenu.add_cascade(label="Herramientas",menu=archivoherramientas)
+navmenu.add_cascade(label="Ayuda",menu=archivoayuda)
+navmenu.add_cascade(label="Acerca de...",menu=archivoacerca)
+##############FOndooo#####################################
+fondito=PhotoImage(file="Imagenes\Fondo.png")
+Label(marco,image=fondito).place(x="0", y="0")
+#######Boton#######################
+botstart=Button(marco, text="Start",bg="#5CC1E1",fg="white",font=("OCR A Extended", 16),command=juegosss)
+botstart.place(x="183", y="225")
+botstart.config(borderwidth = 0,cursor="hand2")
+
+
+
+ventana.mainloop()#para que inicie la ventana debe de estar en un bucle infinito, siempre de ultimo

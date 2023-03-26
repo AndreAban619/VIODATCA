@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>927</width>
+    <height>508</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>927</width>
+    <height>508</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>927</width>
+    <height>508</height>
+   </size>
+  </property>
+  <property name="sizeIncrement">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#Dialog{
+background-color: qlineargradient(spread:pad, x1:0.222091, y1:0.25, x2:0.556818, y2:0.528, stop:0.551136 rgba(121, 54, 255, 255));}</string>
+  </property>
+  <widget class="QPushButton" name="startboton">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>220</y>
+     <width>91</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius:20px;
+font: 20pt &quot;OCR A Extended&quot;;
+background-color: rgb(59, 59, 179);
+color:white;
+
+</string>
+   </property>
+   <property name="text">
+    <string>Start</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Fondoventana">
+   <property name="geometry">
+    <rect>
+     <x>-10</x>
+     <y>-20</y>
+     <width>941</width>
+     <height>551</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="fondo.qrc">:/cct/Fondo.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <zorder>Fondoventana</zorder>
+  <zorder>startboton</zorder>
+ </widget>
+ <resources>
+  <include location="fondo.qrc"/>
+ </resources>
+ <connections/>
+</ui>

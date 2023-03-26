@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>927</width>
+    <height>508</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>927</width>
+    <height>508</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>927</width>
+    <height>508</height>
+   </size>
+  </property>
+  <property name="sizeIncrement">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#Dialog{
+background-color: qlineargradient(spread:pad, x1:0.222091, y1:0.25, x2:0.556818, y2:0.528, stop:0.551136 rgba(121, 54, 255, 255));}</string>
+  </property>
+  <widget class="QLabel" name="instrulabel">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>-20</y>
+     <width>911</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 20pt &quot;OCR A Extended&quot;;
+color: white;</string>
+   </property>
+   <property name="text">
+    <string>Escribe un nombre para comenzar:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="camponombre">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>200</y>
+     <width>231</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <property name="whatsThis">
+    <string/>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius:20px;
+font: 25pt &quot;OCR A Extended&quot;;
+background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="vamosboton">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>310</y>
+     <width>141</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius:20px;
+font: 20pt &quot;OCR A Extended&quot;;
+background-color: rgb(59, 59, 179);
+color:white;
+
+</string>
+   </property>
+   <property name="text">
+    <string>VAMOS</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Fondoventana">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>-20</y>
+     <width>941</width>
+     <height>551</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/cct/DALL·E 2023-02-19 05.25.06 - fondo con diseño bassado en redes neuronales.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <zorder>Fondoventana</zorder>
+  <zorder>instrulabel</zorder>
+  <zorder>camponombre</zorder>
+  <zorder>vamosboton</zorder>
+ </widget>
+ <resources>
+  <include location="fondo.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,46 @@
+Here is the list of interesting ones −
+
+"arrow"
+"circle"
+"clock"
+"cross"
+"dotbox"
+"exchange"
+"fleur"
+"heart"
+"heart"
+"man"
+"mouse"
+"pirate"
+"plus"
+"shuttle"
+"sizing"
+"spider"
+"spraycan"
+"star"
+"target"
+"tcross"
+"trek"
+"watch"
+
+
+def logindata():
+    name= login.lineEdit.text()
+    print("Te llamas: " + name)
+    
+    if len(name)==0:
+        login.label.setText("Ingresa un nombre wey")
+       
+    elif name == "pepe":
+         entrarr()
+    else:
+        salirrr()
+def entrarr():
+    login.hide()
+    entrar.show()
+
+def salirrr():
+    login.hide()
+    error.show()
+#funcion boton
+login.pushButton.clicked.connect(logindata)

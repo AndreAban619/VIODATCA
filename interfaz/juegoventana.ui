@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>927</width>
+    <height>508</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>927</width>
+    <height>508</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>927</width>
+    <height>508</height>
+   </size>
+  </property>
+  <property name="sizeIncrement">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#Dialog{
+background-color: qlineargradient(spread:pad, x1:0.222091, y1:0.25, x2:0.556818, y2:0.528, stop:0.551136 rgba(121, 54, 255, 255));}</string>
+  </property>
+  <widget class="QLabel" name="parainstrulabel">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>-10</y>
+     <width>361</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 20pt &quot;OCR A Extended&quot;;
+color: black;</string>
+   </property>
+   <property name="text">
+    <string>Dale click a empezar: </string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="empiezaboton">
+   <property name="geometry">
+    <rect>
+     <x>820</x>
+     <y>210</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius:20px;
+font: 12pt &quot;OCR A Extended&quot;;
+background-color: rgb(59, 59, 179);
+color:white;
+
+</string>
+   </property>
+   <property name="text">
+    <string>Empezar</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Fondoventana">
+   <property name="geometry">
+    <rect>
+     <x>-70</x>
+     <y>-60</y>
+     <width>1061</width>
+     <height>601</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/cct/DALL·E 2023-02-19 05.17.40 - Fondo de IA diseño.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="parapegartxt">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>30</y>
+     <width>811</width>
+     <height>221</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>211</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 12pt &quot;OCR A Extended&quot;;
+color: black;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="scaledContents">
+    <bool>false</bool>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_3">
+   <property name="geometry">
+    <rect>
+     <x>820</x>
+     <y>260</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius:20px;
+font: 12pt &quot;OCR A Extended&quot;;
+background-color: rgb(85, 255, 127);
+color:white;
+</string>
+   </property>
+   <property name="text">
+    <string>Reiniciar</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="dijistetxt">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>240</y>
+     <width>351</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 20pt &quot;OCR A Extended&quot;;
+color: black;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="parapegartxt_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>280</y>
+     <width>811</width>
+     <height>211</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 12pt &quot;OCR A Extended&quot;;
+color: black;</string>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="scaledContents">
+    <bool>false</bool>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="dijistetxt_2">
+   <property name="geometry">
+    <rect>
+     <x>760</x>
+     <y>0</y>
+     <width>71</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 12pt &quot;OCR A Extended&quot;;
+color: black;</string>
+   </property>
+   <property name="text">
+    <string>Tiempo:</string>
+   </property>
+  </widget>
+  <widget class="QLCDNumber" name="Tiempoled">
+   <property name="geometry">
+    <rect>
+     <x>830</x>
+     <y>2</y>
+     <width>91</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>WaitCursor</cursorShape>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(0, 0, 127);</string>
+   </property>
+   <property name="lineWidth">
+    <number>1</number>
+   </property>
+   <property name="midLineWidth">
+    <number>0</number>
+   </property>
+   <property name="mode">
+    <enum>QLCDNumber::Dec</enum>
+   </property>
+   <property name="segmentStyle">
+    <enum>QLCDNumber::Filled</enum>
+   </property>
+   <property name="intValue" stdset="0">
+    <number>0</number>
+   </property>
+  </widget>
+  <zorder>Fondoventana</zorder>
+  <zorder>parainstrulabel</zorder>
+  <zorder>empiezaboton</zorder>
+  <zorder>parapegartxt</zorder>
+  <zorder>pushButton_3</zorder>
+  <zorder>dijistetxt</zorder>
+  <zorder>parapegartxt_2</zorder>
+  <zorder>dijistetxt_2</zorder>
+  <zorder>Tiempoled</zorder>
+ </widget>
+ <resources>
+  <include location="fondo.qrc"/>
+ </resources>
+ <connections/>
+</ui>

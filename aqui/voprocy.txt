@@ -1,0 +1,44 @@
+import webbrowser
+import speech_recognition as sr
+r= sr.Recognizer()
+with sr.Microphone() as source:
+        print("HOLA, soy tu asistente de voz")
+        audio= r.listen(source)
+
+        try:
+            text= r.recognize_google(audio)
+            print('has dicho: {}'.format(txt))
+            print(txt)
+            if "amazon" in text:
+                webbrowser.open('https://www.youtube.com/watch?v=AIljNC4M7zg&lc=Ugx9pl4aXvpGiVRc8Mt4AaABAg')
+            if "noticias" in text:
+                webbrowser.open('https://inteligencia-artificial.dev/formacion/')
+
+        except:
+            print('No entendi we')
+*****************************
+import speech_recognition as sr  # importamos la libreria
+import pyttsx3
+
+
+escuchar = sr.Recognizer()
+#voice_id = 'spanish-latin-am'
+inicializar = pyttsx3.init()
+velocidad = 130  # voz lenta
+#text = r.recognize_google(audio,language='es-MX')
+inicializar.setProperty('rate', velocidad)  # le pasamos la velocidad de la voz
+nombre = "ancorvis"  # nombre del bot
+
+try:
+    with sr.Microphone() as voz:
+        print("Escuchando....")
+        voice = escuchar.listen(voz) #el microfono reconozca nuestra voz
+        command = escuchar.recognize_google(voice) #guarda lo que decimo en un formato de texto
+        command = command.lower()#cambiamos todo a minisculas
+        if nombre in command:
+            command = command.replace(nombre, "") # el nombre lo reemplace por nada
+            print(command)
+
+except:
+          print("NOOOO Escuchando....")
+pass
