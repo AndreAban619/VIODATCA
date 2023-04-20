@@ -8,11 +8,27 @@ import pyttsx3
 import threading
 import time
 import os
+import requests
 from threading import Thread #Se crea un hilo para que la funcion de reconocimiento se realice en segundo plano y este no afecte a la GUI
 # comando para converir de .ui a .py  [ python -m PyQt5.uic.pyuic -o inicio-.py inicio.ui  ]
 from datetime import datetime
 import tkinter as tk
-INTERVALO_REFRESCO = 500  # En milisegundos
+
+
+"""url = 'http://localhost:3000/api/citas'
+format_code = 17
+time_start = time.time()
+data= requests.get(url)
+if data.status_code == 200:
+    data = data.json()
+    for e in data:
+        
+        context = {
+        'id':e['id'] 
+        }
+        print(context)
+        
+INTERVALO_REFRESCO = 500  # En milisegundos"""
 
 hora_inicio = datetime.now()
 
@@ -48,6 +64,7 @@ thread_espera = threading.Thread(target=esperacrono, args=(10,), daemon=True)
 thread_espera.start()
 
 def empezarcrono():
+    time.sleep(4) 
     start_time = time.time()
     while True:
             elapsed_time = time.time() - start_time
@@ -55,8 +72,9 @@ def empezarcrono():
             secs = int(elapsed_time % 60)
             print(f'Tiempo transcurrido: {mins:02d}:{secs:02d}', end='\r')
             tiempo_transcurrido = f'{mins:02d}:{secs:02d}'
-            time.sleep(1)
             venjuego.Tiempoled.display ( tiempo_transcurrido)
+            time.sleep(1)
+           
 ###########Funciones ########################
 def startbotofun():
     venjuego.show()
@@ -70,16 +88,18 @@ def reiniciarbotofun():
 def reconocimiento():
     with sr.Microphone() as source:
         venjuego.parainstrulabel.setText("Lee el siguiente texto en voz alta:")
-        venjuego.dijistetxt.setText("Escuchando.")
+        venjuego.dijistetxt.setText("Espera.")
         time.sleep(1) 
-        venjuego.dijistetxt.setText("Escuchando..")
+        venjuego.dijistetxt.setText("Espera..")
         time.sleep(1) 
-        venjuego.dijistetxt.setText("Escuchando...")
+        venjuego.dijistetxt.setText("Espera...")
         time.sleep(1) 
-        venjuego.dijistetxt.setText("Escuchando....")
-        time.sleep(1) 
+        venjuego.dijistetxt.setText("Espera....")
+        Thread(target=empezarcrono).start()
+        #aqui cambiiar a escuchando y el otro a espera
+        time.sleep(3) 
         print("Escuchando..")
-        
+        venjuego.dijistetxt.setText("Escuchando")
         try:
             audio= r.listen(source)
             text = r.recognize_google(audio,language='es-MX') #lee el audio lo compara con la voz en español y lo convierte a texto
@@ -88,12 +108,10 @@ def reconocimiento():
             print(text) #cuando imprima el texto detenga al boton
 
         except:
-            venjuego.dijistetxt.setText("No entendí nada de eso :c")
+            venjuego.dijistetxt.setText("No pude escucharte, Intentalo de nuevo")
 
 def empiezabotonfun():
     Thread(target=reconocimiento).start() #el boton llama a la funcion de reconocimiento y la ejecuta en segundo plano
-    time.sleep(1) 
-    Thread(target=empezarcrono).start()
     #venjuego.parapegartxt_2.setText(texto)
 
 """def vamosbotofun():  #cambiar esto y hacerlo solo uno
@@ -136,6 +154,5 @@ veninicio.show()
 app.exec()
 
 ##############notas#######
-"""Falta poner la base datos con xammp
-    hacer que evalue el texto por la lectura
-    arreglar cosas feas, evaluación (se avlualara por tiempo), detener hilos"""
+""" hacer que evalue el texto por la lectura
+    arreglar cosas feas, evaluación (se avlualara por tiempo), detener hilos, palabras malas  en rojo o algo asi"""
