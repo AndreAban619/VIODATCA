@@ -1,7 +1,8 @@
 from PyQt5 import   QtWidgets, uic, QtGui
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtGui import QImage, QFont, QPixmap #Se importa l alibreria de QPixmap
-from PyQt5.QtCore import QTime
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtCore import QTimer
 import webbrowser #libreria abrir web
 import speech_recognition as sr    #libreria para reconocer
 import pyttsx3 
@@ -13,7 +14,7 @@ from threading import Thread #Se crea un hilo para que la funcion de reconocimie
 # comando para converir de .ui a .py  [ python -m PyQt5.uic.pyuic -o inicio-.py inicio.ui  ]
 from datetime import datetime
 import tkinter as tk
-
+#####################3
 
 """url = 'http://localhost:3000/api/citas'
 format_code = 17
@@ -29,9 +30,7 @@ if data.status_code == 200:
         print(context)
         
 INTERVALO_REFRESCO = 500  # En milisegundos"""
-
-hora_inicio = datetime.now()
-
+############### inicializar py y el reconocedor
 inicializar = pyttsx3.init()
 r= sr.Recognizer()
 
@@ -55,27 +54,24 @@ venjuego.setWindowTitle("VIODATCA")
 venjuego.setWindowIcon(QtGui.QIcon('interfaz\VIODATCA.ico'))
 venjuego.Tiempoled.display ("00:00")
 ##########CRONOMETRO###########################
+class Cronometro:
+    def __init__(self):
+        self.tiempo = 0
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.actualizar_tiempo)
 
-def esperacrono(tiempo):
-    time.sleep(tiempo)
-    # realizar lo que quieras tras esperar <tiempo>
+    def iniciar(self):
+        self.timer.start(1000)
 
-thread_espera = threading.Thread(target=esperacrono, args=(10,), daemon=True)
-thread_espera.start()
+    def detener(self):
+        self.timer.stop()
 
-def empezarcrono():
-    time.sleep(4) 
-    start_time = time.time()
-    while True:
-            elapsed_time = time.time() - start_time
-            mins = int(elapsed_time / 60)
-            secs = int(elapsed_time % 60)
-            print(f'Tiempo transcurrido: {mins:02d}:{secs:02d}', end='\r')
-            tiempo_transcurrido = f'{mins:02d}:{secs:02d}'
-            venjuego.Tiempoled.display ( tiempo_transcurrido)
-            time.sleep(1)
-           
+    def actualizar_tiempo(self):
+        self.tiempo += 1
+        venjuego.Tiempoled.display (self.tiempo)
+        print(self.tiempo)
 ###########Funciones ########################
+crono = Cronometro()
 def startbotofun():
     venjuego.show()
     venjuego.parapegartxt.setText("La gloria del mundo es transitoria, y no es ella la que nos da la dimensión de nuestra vida, sino la elección que hacemos de seguir nuestra Leyenda Personal, tener fe en nuestras utopías y luchar por nuestros sueños")
@@ -88,32 +84,26 @@ def reiniciarbotofun():
 def reconocimiento():
     with sr.Microphone() as source:
         venjuego.parainstrulabel.setText("Lee el siguiente texto en voz alta:")
-        venjuego.dijistetxt.setText("Espera.")
-        time.sleep(1) 
-        venjuego.dijistetxt.setText("Espera..")
-        time.sleep(1) 
-        venjuego.dijistetxt.setText("Espera...")
-        time.sleep(1) 
-        venjuego.dijistetxt.setText("Espera....")
-        Thread(target=empezarcrono).start()
         #aqui cambiiar a escuchando y el otro a espera
-        time.sleep(3) 
+        #time.sleep(3) 
         print("Escuchando..")
         venjuego.dijistetxt.setText("Escuchando")
         try:
-            audio= r.listen(source)
+            audio= r.listen(source, timeout=5)#escucha la voz y la para despues de cierto tiempo
             text = r.recognize_google(audio,language='es-MX') #lee el audio lo compara con la voz en español y lo convierte a texto
             venjuego.dijistetxt.setText("Yo escuche:")
             venjuego.parapegartxt_2.setText(text)
             print(text) #cuando imprima el texto detenga al boton
-
         except:
-            venjuego.dijistetxt.setText("No pude escucharte, Intentalo de nuevo")
+            venjuego.dijistetxt.setText("No pude escucharte")
 
 def empiezabotonfun():
+    crono.iniciar()
     Thread(target=reconocimiento).start() #el boton llama a la funcion de reconocimiento y la ejecuta en segundo plano
+    
     #venjuego.parapegartxt_2.setText(texto)
-
+def parar():
+    crono.detener()
 """def vamosbotofun():  #cambiar esto y hacerlo solo uno
     name= vennombre.camponombre.text()
     print("Te llamas: " + name)
@@ -141,9 +131,8 @@ veninicio.startboton.clicked.connect(startbotofun)
 #vennombre.vamosboton.clicked.connect(vamosbotofun)
 venjuego.pushButton_3.clicked.connect(reiniciarbotofun)
 venjuego.empiezaboton.clicked.connect(empiezabotonfun)
-
-
-
+venjuego.pushButton_4.clicked.connect(parar)
+############
 """veninicio.salirboton.clicked.connect(lambda: salirbotonfun("1")) #Hay que pasar el numero de ventana para que se abra en cada caso
 vennombre.pushButton_2.clicked.connect(lambda: salirbotonfun("2"))
 venjuego.salirboton.clicked.connect(lambda: salirbotonfun("3"))"""
