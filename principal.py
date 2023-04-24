@@ -6,37 +6,17 @@ from PyQt5.QtCore import QTimer
 import webbrowser #libreria abrir web
 import speech_recognition as sr    #libreria para reconocer
 import pyttsx3 
-import threading
 import time
-import os
 import requests
+import random
 from threading import Thread #Se crea un hilo para que la funcion de reconocimiento se realice en segundo plano y este no afecte a la GUI
-# comando para converir de .ui a .py  [ python -m PyQt5.uic.pyuic -o inicio-.py inicio.ui  ]
-from datetime import datetime
-import tkinter as tk
-#####################3
-
-"""url = 'http://localhost:3000/api/citas'
-format_code = 17
-time_start = time.time()
-data= requests.get(url)
-if data.status_code == 200:
-    data = data.json()
-    for e in data:
-        
-        context = {
-        'id':e['id'] 
-        }
-        print(context)
-        
-INTERVALO_REFRESCO = 500  # En milisegundos"""
+# comando para converir de .ui a .py  [ python -m PyQt5.uic.pyuic -o inicio-.py inicio.ui  ]        
 ############### inicializar py y el reconocedor
 inicializar = pyttsx3.init()
 r= sr.Recognizer()
 
 ###instalar aplicacion
 app= QtWidgets.QApplication([])
-
 ##cargar archivos
 veninicio= uic.loadUi("interfaz\Inicio.ui")
 #vennombre= uic.loadUi("interfaz\Insertenombre.ui")
@@ -53,6 +33,7 @@ veninicio.setWindowIcon(QtGui.QIcon('interfaz\VIODATCA.ico'))
 venjuego.setWindowTitle("VIODATCA")
 venjuego.setWindowIcon(QtGui.QIcon('interfaz\VIODATCA.ico'))
 venjuego.Tiempoled.display ("00:00")
+tiempoguardado=0
 ##########CRONOMETRO###########################
 class Cronometro:
     def __init__(self):
@@ -62,25 +43,45 @@ class Cronometro:
 
     def iniciar(self):
         self.timer.start(1000)
-
+        self.tiempo=0
+        
     def detener(self):
         self.timer.stop()
 
     def actualizar_tiempo(self):
         self.tiempo += 1
         venjuego.Tiempoled.display (self.tiempo)
+        global tiempoguardado
+        tiempoguardado = self.tiempo
         print(self.tiempo)
+
+def obtenercita(idcita):
+    url = 'http://localhost:3000/api/citas'  # guarda la url en una variable
+    data= requests.get(url)   # hace un get a la api que nos conecta a xampp
+    if data.status_code == 200:  #para la conexion responde con un 200 de conexion
+        data = data.json() # lo  gaurda en el json 
+        for e in data:    #hace un for con los datos
+             if e['id']==idcita:  #compara la id que se genera con el numero ramdom y guarda la cita en context
+
+                """context = {
+            'id':e['id'] 
+            }"""
+                cita = {
+           e['cita'] : e['autor'] 
+            }
+            #filtered_data.append=(context)
+                citacad= str(cita)
+                citacade= citacad.replace('{',' ')
+                citacadena= citacade.replace('}',' ')
+                venjuego.parapegartxt.setText(citacadena)
+                print(cita)
+#filtered_data.append(context) 
 ###########Funciones ########################
 crono = Cronometro()
 def startbotofun():
     venjuego.show()
-    venjuego.parapegartxt.setText("La gloria del mundo es transitoria, y no es ella la que nos da la dimensión de nuestra vida, sino la elección que hacemos de seguir nuestra Leyenda Personal, tener fe en nuestras utopías y luchar por nuestros sueños")
+    venjuego.parapegartxt.setText(" ")
     veninicio.hide()
-
-def reiniciarbotofun():
-    venjuego.hide()
-    venjuego.show()
-
 def reconocimiento():
     with sr.Microphone() as source:
         venjuego.parainstrulabel.setText("Lee el siguiente texto en voz alta:")
@@ -98,12 +99,25 @@ def reconocimiento():
             venjuego.dijistetxt.setText("No pude escucharte")
 
 def empiezabotonfun():
+    numero_aleatorio = random.randint(1, 15)
+    print(numero_aleatorio)
+    obtenercita(numero_aleatorio)
     crono.iniciar()
     Thread(target=reconocimiento).start() #el boton llama a la funcion de reconocimiento y la ejecuta en segundo plano
-    
-    #venjuego.parapegartxt_2.setText(texto)
+     #venjuego.parapegartxt_2.setText(texto)
 def parar():
+    venjuego.parainstrulabel.setText("Silencio, Parando")
     crono.detener()
+def reiniciar():
+    venjuego.parainstrulabel.setText("Dale click a empezar: ")
+    venjuego.parapegartxt.setText(" ")
+    venjuego.parapegartxt_2.setText(" ")
+    venjuego.Tiempoled.display ("00:00")
+    venjuego.dijistetxt.setText(" ")
+    global tiempoguardado
+    print(tiempoguardado)
+
+    
 """def vamosbotofun():  #cambiar esto y hacerlo solo uno
     name= vennombre.camponombre.text()
     print("Te llamas: " + name)
@@ -129,7 +143,7 @@ def parar():
 #funcion de boton de start y del boton salir
 veninicio.startboton.clicked.connect(startbotofun)
 #vennombre.vamosboton.clicked.connect(vamosbotofun)
-venjuego.pushButton_3.clicked.connect(reiniciarbotofun)
+venjuego.pushButton_3.clicked.connect(reiniciar)
 venjuego.empiezaboton.clicked.connect(empiezabotonfun)
 venjuego.pushButton_4.clicked.connect(parar)
 ############
