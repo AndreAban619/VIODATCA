@@ -34,6 +34,7 @@ venjuego.setWindowTitle("VIODATCA")
 venjuego.setWindowIcon(QtGui.QIcon('interfaz\VIODATCA.ico'))
 venjuego.Tiempoled.display ("00:00")
 tiempoguardado=0
+tiemponormal=0
 ##########CRONOMETRO###########################
 class Cronometro:
     def __init__(self):
@@ -55,6 +56,21 @@ class Cronometro:
         tiempoguardado = self.tiempo
         print(self.tiempo)
 
+def porcentaje_cercania(num1, num2):
+    calificacion = (1 - abs(num1 - num2) / ((num1 + num2) / 2))* 100
+    calificacionenviada = str(calificacion)
+    venjuego.label_4.setText(calificacionenviada)
+    print(calificacion)
+    if calificacion < 0 :
+        venjuego.dijistetxt.setText("Estas muy lejos :C")
+        
+    else :
+        venjuego.dijistetxt.setText("Buen trabajo, sigue asi :)")
+        
+    
+    #return () 
+    
+
 def obtenercita(idcita):
     url = 'http://localhost:3000/api/citas'  # guarda la url en una variable
     data= requests.get(url)   # hace un get a la api que nos conecta a xampp
@@ -69,12 +85,22 @@ def obtenercita(idcita):
                 cita = {
            e['cita'] : e['autor'] 
             }
+                tiempoo = {
+            e['tiempo'] 
+            }
             #filtered_data.append=(context)
                 citacad= str(cita)
                 citacade= citacad.replace('{',' ')
                 citacadena= citacade.replace('}',' ')
+                tiempoocad= str(tiempoo)
+                tiempoocade= tiempoocad.replace('{',' ')
+                tiempoocadena= tiempoocade.replace('}',' ')
                 venjuego.parapegartxt.setText(citacadena)
-                print(cita)
+                print(cita) 
+                global tiemponormal
+                tiempoint= int(tiempoocadena)
+                tiemponormal=tiempoint
+                print(tiempoocadena)
 #filtered_data.append(context) 
 ###########Funciones ########################
 crono = Cronometro()
@@ -102,8 +128,8 @@ def empiezabotonfun():
     numero_aleatorio = random.randint(1, 15)
     print(numero_aleatorio)
     obtenercita(numero_aleatorio)
-    crono.iniciar()
     Thread(target=reconocimiento).start() #el boton llama a la funcion de reconocimiento y la ejecuta en segundo plano
+    crono.iniciar()
      #venjuego.parapegartxt_2.setText(texto)
 def parar():
     venjuego.parainstrulabel.setText("Silencio, Parando")
@@ -114,9 +140,14 @@ def reiniciar():
     venjuego.parapegartxt_2.setText(" ")
     venjuego.Tiempoled.display ("00:00")
     venjuego.dijistetxt.setText(" ")
+    venjuego.label_4.setText(" ")
     global tiempoguardado
     print(tiempoguardado)
 
+def botoncalif():
+    global tiempoguardado, tiemponormal
+    porcentaje_cercania(tiempoguardado,tiemponormal)
+    
     
 """def vamosbotofun():  #cambiar esto y hacerlo solo uno
     name= vennombre.camponombre.text()
@@ -144,8 +175,9 @@ def reiniciar():
 veninicio.startboton.clicked.connect(startbotofun)
 #vennombre.vamosboton.clicked.connect(vamosbotofun)
 venjuego.pushButton_3.clicked.connect(reiniciar)
-venjuego.empiezaboton.clicked.connect(empiezabotonfun)
+venjuego.empiezaboton_2.clicked.connect(empiezabotonfun)
 venjuego.pushButton_4.clicked.connect(parar)
+venjuego.pushButton_5.clicked.connect(botoncalif)
 ############
 """veninicio.salirboton.clicked.connect(lambda: salirbotonfun("1")) #Hay que pasar el numero de ventana para que se abra en cada caso
 vennombre.pushButton_2.clicked.connect(lambda: salirbotonfun("2"))
@@ -157,5 +189,3 @@ veninicio.show()
 app.exec()
 
 ##############notas#######
-""" hacer que evalue el texto por la lectura
-    arreglar cosas feas, evaluación (se avlualara por tiempo), detener hilos, palabras malas  en rojo o algo asi"""
