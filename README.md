@@ -27,5 +27,12 @@ esto creara la conexión entre la API y la base de datos, si todo sale bien te d
 
 ahora solo corre el programa y listo, disfruta el programa.
 
+# Nueva actualización
+
+Ejecuten el el archivo ViodatcaEXE.bat
+
+Esto abrira la API y el Programa al mismo tiempo, sin abrir el código y ejecutarlo
+pero las instalación de las librerias se deben de hacer.
+
 
 
